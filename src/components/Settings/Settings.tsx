@@ -27,7 +27,7 @@ export function SettingsModal({
           <div>
             <button
               onClick={() => setExportOpen(true)}
-              className="inline-flex justify-center items-center border-2 rounded-2xl m-1 p-2 hover:cursor-pointer"
+              className="w-32 ml-0.5 inline-flex justify-center items-center border-2 rounded-2xl m-1 p-2 hover:cursor-pointer"
             >
               <Upload className="ml-2 mr-2"></Upload> Export
             </button>
@@ -38,7 +38,7 @@ export function SettingsModal({
             />
             <button
               onClick={() => setResetOpen(true)}
-              className="inline-flex justify-center items-center border-2 rounded-2xl m-1 p-2 hover:cursor-pointer"
+              className="w-32 inline-flex justify-center items-center border-2 rounded-2xl m-1 p-2 hover:cursor-pointer"
             >
               <RotateCcw className="ml-2 mr-2"></RotateCcw> Reset
             </button>
@@ -49,9 +49,9 @@ export function SettingsModal({
           </div>
           <button
             onClick={() => setImportOpen(true)}
-            className="inline-flex justify-center items-center border-2 rounded-2xl m-1 p-2 hover:cursor-pointer"
+            className=" inline-block justify-center items-center border-2 rounded-2xl m-1 p-2 hover:cursor-pointer w-full"
           >
-            <Import className="ml-2 mr-2"></Import> Import
+            <Import className="ml-2 mr-2 flex justify-center items-center align-middle"></Import> <span>Import</span>
           </button>
           <ImportModal
             accountSecret={accountSecret}

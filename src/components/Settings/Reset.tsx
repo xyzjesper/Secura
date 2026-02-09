@@ -1,5 +1,5 @@
 import { RotateCcw } from "lucide-react";
-import { resetApp } from "../../utils/default";
+import { resetApp } from "../../lib/default";
 
 export function ResetModal({
   isOpen,
@@ -20,6 +20,7 @@ export function ResetModal({
       <div className="fixed inset-0 flex justify-center items-center bg-background/50 backdrop-blur-sm z-100">
         <div className="w-72 bg-background/90 border border-zinc-700 rounded-2xl shadow-2xl p-6 flex flex-col items-center gap-5">
           <div>
+            
             <button
               className="inline-flex items-center justify-center border-2 rounded-2xl p-2 cursor-pointer"
               onClick={() => {
@@ -34,6 +35,7 @@ export function ResetModal({
               </p>
             </button>
           </div>
+          <hr className="w-full border-zinc-700 my-2" />
           <div>
             <button className="cursor-pointer" onClick={() => onClsoe()}>
               Close Menu

@@ -1,5 +1,5 @@
 import Webcam from "react-webcam";
-import { cancelScan, requestScanPermissions, startScan } from "../utils/qrScan";
+import { cancelScan, requestScanPermissions, startScan } from "../../lib/qrScan";
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import { X } from "lucide-react";

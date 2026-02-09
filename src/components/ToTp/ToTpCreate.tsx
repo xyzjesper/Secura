@@ -1,20 +1,20 @@
 import { Check, SwitchCamera, TextCursorInput, X } from "lucide-react";
 import { useState } from "react";
 import { ToTpAccount } from "../../types/totp";
-import { addAccount, generateToTp } from "../../utils/totp";
-import { QrCodeScanner } from "../QrCodeScaner";
+import { addAccount, generateToTp } from "../../lib/totp";
+import { QrCodeScanner } from "../QR/QrCodeScaner";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function ToTpCreate({
   accountSecret,
   onClose,
   isOpen,
-  accountsCallback,
+  handleRefresh,
 }: {
   accountSecret: string;
   onClose: () => void;
   isOpen: boolean;
-  accountsCallback: (accounts: ToTpAccount[]) => void;
+  handleRefresh: (accounts: ToTpAccount[]) => void;
 }) {
   if (!isOpen) return;
 
@@ -28,7 +28,7 @@ export function ToTpCreate({
   const [toTpType, setToTpType] = useState<number>(0);
   const [icons, setIcons] = useState<string[]>([]);
   const [statusMessage, setStatusMessage] = useState<string>(
-    "Awaiting creation..."
+    "Awaiting creation...",
   );
 
   const handleCreate = async () => {
@@ -46,13 +46,15 @@ export function ToTpCreate({
               Id: d.Id,
               Name: d.Name,
               Code: code.success ? code.token : 0,
-              Icon: d.Icon ?? null,
+              Icon: d.Icon ?? "ic:baseline-fingerprint",
               OtpAuthUrl: d.OtpAuthUrl,
             };
-          })
+          }),
         );
-
-        accountsCallback(totpAccounts as ToTpAccount[]);
+        handleRefresh(totpAccounts);
+        setTimeout(() => {
+          handleRefresh([]);
+        }, 1000);
         setStatusMessage("Account created successfully!");
 
         setTimeout(() => {
@@ -71,17 +73,17 @@ export function ToTpCreate({
       ...(type === 1
         ? { Name: text }
         : type === 2
-        ? { Icon: text }
-        : {
-            OtpAuthUrl: text,
-          }),
+          ? { Icon: text }
+          : {
+              OtpAuthUrl: text,
+            }),
     }));
   };
 
   const fetchIcons = async (prefix: string) => {
     try {
       const res = await fetch(
-        `https://api.iconify.design/search?query=${prefix}&pretty=1`
+        `https://api.iconify.design/search?query=${prefix}&pretty=1`,
       );
       const json = (await res.json()).icons as string[];
       setIcons(json);

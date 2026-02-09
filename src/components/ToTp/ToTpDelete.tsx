@@ -1,7 +1,7 @@
 import { Check, X, AlertTriangle } from "lucide-react";
 import { ToTpAccount } from "../../types/totp";
 import { useState } from "react";
-import { deleteToTp } from "../../utils/totp";
+import { deleteToTp } from "../../lib/totp";
 import { stringToIcon } from "@iconify/utils";
 import { motion, AnimatePresence } from "framer-motion";
 

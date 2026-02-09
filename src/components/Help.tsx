@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { appVersion } from "../utils/default";
+import { appVersion } from "../lib/default";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import { ArrowLeft } from "lucide-react";
 
@@ -42,7 +42,7 @@ export function Help({
                             className="underline hover:text-pink-600 cursor-pointer"
                             onClick={() =>
                               openUrl(
-                                "https://doc.xyzhub.link/s/secura-2faapp/doc/changelogs-mrcNhj45is"
+                                `https://github.com/xyzjesper/Secura/releases/tag/${appVerion}`,
                               )
                             }
                           >
@@ -63,7 +63,7 @@ export function Help({
                           <a
                             className="underline hover:text-pink-600 cursor-pointer"
                             onClick={() =>
-                              openUrl("https://doc.xyzhub.link/s/secura-2faapp")
+                              openUrl("https://doc.xyzify.ing/s/secura-2faapp")
                             }
                           >
                             Read More
@@ -78,7 +78,7 @@ export function Help({
                             className="underline hover:text-pink-600 cursor-pointer"
                             onClick={() =>
                               openUrl(
-                                "https://doc.xyzhub.link/s/secura-2faapp/doc/docs-0Da46gRERF"
+                                "https://doc.xyzify.ing/s/secura-2faapp/doc/docs-0Da46gRERF",
                               )
                             }
                           >
@@ -94,7 +94,7 @@ export function Help({
                             className="underline hover:text-pink-600 cursor-pointer"
                             onClick={() =>
                               openUrl(
-                                "https://github.com/xyzjesper/Secura-2FAApp?tab=GPL-3.0-1-ov-file"
+                                "https://github.com/xyzjesper/Secura-2FAApp?tab=GPL-3.0-1-ov-file",
                               )
                             }
                           >
@@ -105,12 +105,7 @@ export function Help({
                     </tbody>
                   </table>
                   <span className="flex text-xs mt-2 items-center justify-center cursor-pointer">
-                    <a
-                      onClick={() => openUrl("https://xy-z.org")}
-                      className="underline hover:text-pink-600"
-                    >
-                      (c) 2025 xy-z.org
-                    </a>
+                    <a>(c) 2026 xyzOrg</a>
                   </span>
                 </div>
               </div>

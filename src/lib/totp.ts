@@ -17,6 +17,12 @@ export async function getAccounts(
       "SELECT * FROM accounts;"
     )) as ToTpAccount[];
 
+    if (!data) return {
+      success: true,
+      data: [],
+      message: "No Accounts found",
+    };
+
     const decryptedData = (await Promise.all(
       data.map(async (a: ToTpAccount) => {
         const url = await invoke("unblur_password", {
@@ -41,9 +47,9 @@ export async function getAccounts(
     };
   } catch (err) {
     return {
-      success: false,
+      success: true,
       data: [],
-      message: `Error fetching accounts: ${String(err)}`,
+      message: `No Accounts`,
     };
   }
 }
@@ -145,7 +151,7 @@ export async function deleteToTp(totpAccountId: number): Promise<boolean> {
 }
 
 export async function upateToTp(
-  totpAccountId: number,
+  accountId: number,
   name?: string,
   icon?: string
 ): Promise<UpdateAccountCallback> {
@@ -160,17 +166,23 @@ export async function upateToTp(
       await initDatabaseData(
         `UPDATE accounts
                  SET Name='${name}'
-                 WHERE Id = '${totpAccountId}'`
+                 WHERE Id = '${accountId}'`
       );
     }
     if (icon) {
       await initDatabaseData(
         `UPDATE accounts
                  SET Icon='${icon}'
-                 WHERE Id = '${totpAccountId}'`
+                 WHERE Id = '${accountId}'`
       );
     }
+    
+    const account =  (await getDatabaseData(
+      `SELECT * FROM accounts WHERE Id=${accountId};`
+    )) as ToTpAccount[];
+
     return {
+      account: account[0],
       success: true,
       message: "Account updated successfully.",
     };

@@ -89,9 +89,10 @@ export async function loginToApp(loginCode: string): Promise<LoginCallback> {
 
     if (!secretFile) {
       await manageSecretKey(loginCode);
+      loginToApp(loginCode)
       return {
         success: false,
-        message: "Confirm account creation. No account found",
+        message: "No account found! Creating account please wait.",
       };
     }
 

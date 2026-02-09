@@ -10,11 +10,12 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       stacked
       theme="dark"
       hideProgressBar
-      autoClose={500}
+      autoClose={1000}
       closeOnClick
       className={"bg-secondary"}
       position="bottom-center"
+      limit={1}
     ></ToastContainer>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
 );

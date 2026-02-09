@@ -23,4 +23,5 @@ export type AddAccountCallback = {
 export type UpdateAccountCallback = {
     success: boolean,
     message: string
+    account?: ToTpAccount
 }

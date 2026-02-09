@@ -1,7 +1,7 @@
 import { Download } from "lucide-react";
-import { getAccounts } from "../../utils/totp";
+import { getAccounts } from "../../lib/totp";
 import { AppData } from "../../types/default";
-import { appVersion } from "../../utils/default";
+import { appVersion } from "../../lib/default";
 import { toast } from "react-toastify";
 
 export function ExportModal({
@@ -42,14 +42,13 @@ export function ExportModal({
       <div className="fixed inset-0 flex justify-center items-center bg-background/50 backdrop-blur-sm z-101">
         <div className="w-72 bg-background/90 border border-zinc-700 rounded-2xl shadow-2xl p-6 flex flex-col items-center gap-5">
           <div>
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center mb-3">
               <div>
                 <p className="text-center">
                   Click on Download to download the file and export it.
                 </p>
               </div>
             </div>
-            <hr className="w-full border-zinc-700 my-2" />
             <div className="flex justify-center items-center cursor-pointer">
               <button
                 onClick={() => {
@@ -62,7 +61,7 @@ export function ExportModal({
               </button>
             </div>
           </div>
-
+          <hr className="w-full border-zinc-700 my-2" />
           <div>
             <button className="cursor-pointer" onClick={() => onClsoe()}>
               Close Menu

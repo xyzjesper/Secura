@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Plus, RefreshCcw, Settings } from "lucide-react";
+import { Plus, Settings } from "lucide-react";
 import { SettingsModal } from "./Settings/Settings.tsx";
 import { ToTpCreate } from "./ToTp/ToTpCreate.tsx";
 import { ToTpAccount } from "../types/totp.ts";
@@ -9,7 +9,7 @@ export function Footer({
   handleRefresh,
 }: {
   accountSecret: string;
-  handleRefresh: (accounts?: ToTpAccount[]) => void;
+  handleRefresh: (accounts: ToTpAccount[]) => void;
 }) {
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
   const [openCreateToTpModal, setOpenCreateToTpModal] = useState(false);
@@ -39,18 +39,10 @@ export function Footer({
         </button>
         <ToTpCreate
           accountSecret={accountSecret}
-          accountsCallback={(a) => handleRefresh(a)}
+          handleRefresh={(a) => handleRefresh(a)}
           onClose={() => setOpenCreateToTpModal(false)}
           isOpen={openCreateToTpModal}
         />
-
-        {/* Refresh */}
-        <button
-          onClick={() => handleRefresh()}
-          className="p-4 border-4 border-ring hover:border-ring/70 bg-popover rounded-full shadow-lg transition cursor-pointer"
-        >
-          <RefreshCcw />
-        </button>
       </div>
     </>
   );

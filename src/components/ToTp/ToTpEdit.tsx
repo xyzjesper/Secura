@@ -1,18 +1,18 @@
 import { Check, X } from "lucide-react";
 import { ToTpAccount } from "../../types/totp";
 import { useState } from "react";
-import { upateToTp } from "../../utils/totp";
+import { upateToTp } from "../../lib/totp";
 import { stringToIcon } from "@iconify/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function ToTpUpdate({
   toTpAccount,
   isOpen,
-  isUpdated,
+  onUpdate,
 }: {
   toTpAccount: ToTpAccount;
   isOpen: (bool: boolean) => void;
-  isUpdated: (bool: boolean) => void;
+  onUpdate: (account?: ToTpAccount | null) => void;
 }) {
   const [update, setUpdate] = useState<ToTpAccount>(toTpAccount);
   const [icons, setIcons] = useState<string[]>([]);
@@ -21,7 +21,7 @@ export function ToTpUpdate({
   async function fetchIcons(prefix: string) {
     try {
       const data = await fetch(
-        `https://api.iconify.design/search?query=${prefix}&pretty=1`
+        `https://api.iconify.design/search?query=${prefix}&pretty=1`,
       );
       const json = (await data.json()).icons as string[];
       setIcons(json);
@@ -31,6 +31,7 @@ export function ToTpUpdate({
   }
 
   const handleValueChange = (text: string, type: number) => {
+    if (!text) return;
     setUpdate((prev) => ({
       ...prev,
       ...(type === 1 ? { Name: text } : { Icon: text }),
@@ -38,9 +39,11 @@ export function ToTpUpdate({
   };
 
   const handleUpdate = async () => {
+    if (update.Name == toTpAccount.Name && update.Icon == toTpAccount.Icon)
+      return isOpen(false);
     const req = await upateToTp(toTpAccount.Id, update?.Name, update?.Icon);
-    if (req) {
-      isUpdated(true);
+    if (req.success) {
+      onUpdate(req.account);
       setStatusMsg("Successfully updated your account.");
     } else {
       setStatusMsg("An error occurred while updating!");
@@ -125,7 +128,7 @@ export function ToTpUpdate({
                 type="button"
                 onClick={() => {
                   isOpen(false);
-                  isUpdated(false);
+                  onUpdate(null);
                 }}
                 className="p-3 rounded-full bg-red-600 hover:bg-red-700 transition shadow-md cursor-pointer"
               >

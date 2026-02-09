@@ -11,10 +11,16 @@ import { toast } from "react-toastify";
 export function ToTpModal({
   toTpAccount,
   isOpen,
+  onClose,
+  accountUpdate,
 }: {
   toTpAccount?: ToTpAccount;
-  isOpen: (bool: boolean) => void;
+  isOpen: boolean;
+  onClose: (open: boolean) => void;
+  accountUpdate: (account: ToTpAccount | null) => void;
 }) {
+  if (!isOpen) return;
+
   const [deleteToTp, setDeleteToTp] = useState<ToTpAccount | null>(null);
   const [isExportOpen, setIsExportOpen] = useState<boolean>(false);
   const [updateToTp, setUpdateToTp] = useState<ToTpAccount | null>(null);
@@ -24,7 +30,7 @@ export function ToTpModal({
       {deleteToTp && (
         <ToTpDelete
           isDeleted={(e) => {
-            if (e) isOpen(false);
+            if (e) onClose(false);
           }}
           isOpen={(e) => {
             if (e) setDeleteToTp(toTpAccount!);
@@ -36,8 +42,9 @@ export function ToTpModal({
 
       {updateToTp && (
         <ToTpUpdate
-          isUpdated={(e) => {
-            if (e) isOpen(false);
+          onUpdate={(e) => {
+            if (e != null) accountUpdate(e);
+            else accountUpdate(null);
           }}
           isOpen={(e) => {
             if (e) setUpdateToTp(toTpAccount!);
@@ -53,7 +60,7 @@ export function ToTpModal({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => isOpen(false)}
+            onClick={() => onClose(false)}
             className="fixed inset-0 flex justify-center items-center bg-background/50 backdrop-blur-sm z-10"
           >
             <motion.div
@@ -78,7 +85,7 @@ export function ToTpModal({
                 toTpAccount={toTpAccount}
               ></ToTpExport>
               <button
-                onClick={() => isOpen(false)}
+                onClick={() => onClose(false)}
                 className="absolute top-3 right-3 p-1 rounded-full hover:bg-zinc-800 transition cursor-pointer"
               >
                 <X className="text-zinc-400 hover:text-white" />
@@ -104,11 +111,11 @@ export function ToTpModal({
               </h2>
 
               <div
-                className="flex flex-col items-center gap-1 bg-secondary/30 rounded-lg p-3 w-full cursor-pointer hover:border-2 transition border-zinc-200/60 hover:bg-secondary/10 transition"
+                className="flex flex-col items-center gap-1 bg-secondary/30 rounded-lg p-3 w-full cursor-pointer hover:border-2 border-zinc-200/60 hover:bg-secondary/10 transition"
                 onClick={async () => {
                   toast("Successfully copied to clipboard.");
                   await navigator.clipboard.writeText(
-                    String(toTpAccount?.Code)
+                    String(toTpAccount?.Code),
                   );
                 }}
               >

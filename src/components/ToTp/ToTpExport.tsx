@@ -3,8 +3,8 @@ import { useState } from "react";
 import { stringToIcon } from "@iconify/utils";
 import { Copy, ScanQrCode, X } from "lucide-react";
 import { toast } from "react-toastify";
-import { getToTpQRCode } from "../../utils/qrScan";
-import { QRCodeDisplay } from "../QRCodeDisplay";
+import { getToTpQRCode } from "../../lib/qrScan";
+import { QRCodeDisplay } from "../QR/QRCodeDisplay";
 
 export function ToTpExport({
   toTpAccount,
@@ -75,15 +75,16 @@ export function ToTpExport({
               <div className="inline-flex justify-center items-center">
                 <input
                   type="text"
-                  className="w-full h-12 rounded-lg border border-zinc-700 bg-chart-4/50 px-3 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full h-12 rounded-lg border border-zinc-700 bg-chart-4/50 px-3 text-white placeholder-zinc-500 focus:outline-none focus:ring-2"
                   value={toTpAccount.Name}
                 />
               </div>
               <div className="inline-flex justify-center items-center ml-11 mr-1">
                 {" "}
                 <input
+                  
                   type="text"
-                  className="mr-2 blur-xs w-full h-12 rounded-lg border border-zinc-700 bg-chart-4/50 px-3 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="cursor-copy mr-2 blur-xs w-full h-12 rounded-lg border border-zinc-700 bg-chart-4/50 px-3 text-white placeholder-zinc-500 focus:outline-none"
                   value={
                     toTpAccount.OtpAuthUrl.split("?secret=")[1].split("&")[0]
                   }

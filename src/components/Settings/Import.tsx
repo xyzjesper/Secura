@@ -1,6 +1,6 @@
 import { FolderOpen } from "lucide-react";
 import { AppData } from "../../types/default";
-import { importApp } from "../../utils/default";
+import { importApp } from "../../lib/default";
 import { toast } from "react-toastify";
 import { useState } from "react";
 
@@ -44,10 +44,10 @@ export function ImportModal({
     <>
       <div className="fixed inset-0 flex justify-center items-center bg-background/50 backdrop-blur-sm z-100">
         <div className="w-72 bg-background/90 border border-zinc-700 rounded-2xl shadow-2xl p-6 flex flex-col items-center gap-5">
-          <div className="border-2 h-auto w-60 p-6 rounded-2xl cursor-pointer">
+          <div className="h-auto w-60 cursor-pointer">
             <div
               className={
-                "flex justify-center items-center border-2 p-2 rounded-2xl cursor-pointer"
+                "flex justify-center items-center p-2 rounded-2xl border-2 cursor-pointer"
               }
             >
               <label htmlFor="fileimport" className="text-xs cursor-pointer">
@@ -84,7 +84,7 @@ export function ImportModal({
               </button>
             </div>
           </div>
-
+          <hr className="w-full border-zinc-700 my-2" />
           <div>
             <button className="cursor-pointer" onClick={() => onClsoe()}>
               Close Menu
