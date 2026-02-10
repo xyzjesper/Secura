@@ -1,1 +1,1 @@
-## Read more at xyzDoc https://doc.xyzhub.link/s/secura-2faapp
+## Read more at xyzDoc https://doc.xyzify.ing/s/secura-2faapp/
