@@ -26,11 +26,11 @@ android {
   }
 
 
-  namespace = "dev.xyzjesper.fa_app"
+  namespace = "dev.xyzjesper.secura"
     compileSdk = 36
     defaultConfig {
       manifestPlaceholders["usesCleartextTraffic"] = "false"
-      applicationId = "dev.xyzjesper.fa_app"
+      applicationId = "dev.xyzjesper.secura"
       minSdk = 24
       targetSdk = 36
       versionCode = tauriProperties.getProperty("tauri.android.versionCode", "1").toInt()

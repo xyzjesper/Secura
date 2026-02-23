@@ -23,7 +23,7 @@ pub struct QRCodeResponse {
 }
 
 #[tauri::command]
-pub fn make_totp(oauth: &str) -> Result<TokenResponse, TokenError> {
+pub fn generate_totp(oauth: &str) -> Result<TokenResponse, TokenError> {
     let totp = TOTP::from_url(oauth).map_err(|_| TokenError {
         status: false,
         message: "Failed to make OTP!".to_string(),

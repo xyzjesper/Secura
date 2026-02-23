@@ -6,7 +6,7 @@ import {
   requestPermissions,
   scan,
 } from "@tauri-apps/plugin-barcode-scanner";
-import { ToTpQRCodeCalback } from "../types/callbacks/qrcode";
+import { ToTpQRCodeCalback } from "../types/callback/qrcode";
 
 export const cancelScan = async () => {
   await cancel();

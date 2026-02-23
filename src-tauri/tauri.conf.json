@@ -2,7 +2,7 @@
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Secura",
   "version": "0.2.1",
-  "identifier": "dev.xyzjesper.fa-app",
+  "identifier": "dev.xyzjesper.secura",
   "build": {
     "beforeDevCommand": "bun run dev",
     "devUrl": "http://localhost:1420",
@@ -13,7 +13,7 @@
     "windows": [
       {
         "title": "Secura",
-        "width": 800,
+        "width": 400,
         "height": 600
       }
     ],
@@ -23,7 +23,9 @@
   },
   "plugins": {
     "sql": {
-      "preload": ["sqlite:SecuraDB4.db"]
+      "preload": [
+        "sqlite:secura.db"
+      ]
     }
   },
   "bundle": {

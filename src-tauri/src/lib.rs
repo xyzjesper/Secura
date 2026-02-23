@@ -1,8 +1,8 @@
 pub mod commands;
 
 use commands::config::get_app_version;
-use commands::security::{blur_password, login_to_app, unblur_password};
-use commands::totp::{generate_totp_qr_base64, make_totp};
+use commands::security::{decrypt_keys, encrypt_keys, login};
+use commands::totp::{generate_totp, generate_totp_qr_base64};
 use std::string::String;
 use tauri_plugin_fs::FsExt;
 
@@ -22,12 +22,12 @@ pub fn run() {
         .plugin(tauri_plugin_sql::Builder::default().build())
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
-            make_totp,
+            generate_totp,
             generate_totp_qr_base64,
             get_app_version,
-            blur_password,
-            unblur_password,
-            login_to_app
+            encrypt_keys,
+            decrypt_keys,
+            login
         ])
         .setup(|_app: &mut tauri::App| {
             #[cfg(mobile)]

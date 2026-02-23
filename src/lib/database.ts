@@ -1,5 +1,5 @@
 import Database from "@tauri-apps/plugin-sql";
-import { DATABASE_FILE } from "./default";
+import { DATABASE_FILE } from "./app.ts";
 
 export async function initDatabaseData(query: string, data?: any[]) {
   const db = await Database.load(`sqlite:${DATABASE_FILE}`);

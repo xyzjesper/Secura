@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import { Footer } from "./components/Footer.tsx";
-import { Login } from "./components/Login.tsx";
-import { Accounts } from "./components/Accounts.tsx";
+import { Footer } from "./components/App/Footer.tsx";
+import { Login } from "./components/App/Login.tsx";
+import { Accounts } from "./components/App/Accounts.tsx";
 import { ToTpAccount } from "./types/totp.ts";
 
 export function AuthenticatorApp() {
@@ -18,9 +18,9 @@ export function AuthenticatorApp() {
 
   return (
     <>
-      <div className="min-h-screen bg-background flex flex-col items-center py-10 text-white mb-10">
+      <div className="flex flex-col items-center py-10 text-white mb-10">
         <Accounts updateAccounts={accounts} loginCode={login} />
-        <Footer accountSecret={login} handleRefresh={(a) => {
+        <Footer loginCode={login} handleRefresh={(a) => {
           updateAccounts(a)
         }} />
       </div>

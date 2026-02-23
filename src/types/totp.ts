@@ -1,5 +1,3 @@
-
-
 export type ToTpAccount = {
   Id: number;
   Name: string;

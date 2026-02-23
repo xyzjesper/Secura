@@ -23,7 +23,7 @@
           "path": "$APPCONFIG/*"
         },
         {
-          "path": "$APPCONFIG/.secret.txt"
+          "path": "$APPCONFIG/.secret"
         }
       ]
     }

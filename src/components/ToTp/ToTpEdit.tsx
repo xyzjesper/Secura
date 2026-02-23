@@ -1,7 +1,7 @@
 import { Check, X } from "lucide-react";
 import { ToTpAccount } from "../../types/totp";
 import { useState } from "react";
-import { upateToTp } from "../../lib/totp";
+import { updateToTp } from "../../lib/totp";
 import { stringToIcon } from "@iconify/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -41,7 +41,7 @@ export function ToTpUpdate({
   const handleUpdate = async () => {
     if (update.Name == toTpAccount.Name && update.Icon == toTpAccount.Icon)
       return isOpen(false);
-    const req = await upateToTp(toTpAccount.Id, update?.Name, update?.Icon);
+    const req = await updateToTp(toTpAccount.Id, update?.Name, update?.Icon);
     if (req.success) {
       onUpdate(req.account);
       setStatusMsg("Successfully updated your account.");

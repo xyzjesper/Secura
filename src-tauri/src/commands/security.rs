@@ -11,15 +11,14 @@ pub struct LoginCallback {
 }
 
 #[tauri::command]
-pub fn blur_password(password: String, key: String) -> String {
+pub fn encrypt_keys(password: String, key: String) -> String {
     let encrypted_data = encrypt(password.as_bytes(), key.as_bytes()).expect("Failed to encrypt");
     let encoded = general_purpose::STANDARD.encode(encrypted_data);
-
     encoded
 }
 
 #[tauri::command]
-pub fn unblur_password(encrypted_data: &str, key: String) -> Result<String, bool> {
+pub fn decrypt_keys(encrypted_data: &str, key: String) -> Result<String, bool> {
     let key_bytes = key.as_bytes();
     let decoded = general_purpose::STANDARD.decode(encrypted_data).unwrap();
     let decoded_vec = decoded.to_vec();
@@ -36,8 +35,8 @@ pub fn unblur_password(encrypted_data: &str, key: String) -> Result<String, bool
 }
 
 #[tauri::command]
-pub fn login_to_app(code: &str, secret_code: &str) -> Result<LoginCallback, LoginCallback> {
-    let secret = unblur_password(&secret_code, code.to_string());
+pub fn login(code: &str, secret_code: &str) -> Result<LoginCallback, LoginCallback> {
+    let secret = decrypt_keys(&secret_code, code.to_string());
 
     match secret {
         Ok(s) => Ok(LoginCallback {

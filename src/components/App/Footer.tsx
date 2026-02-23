@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Plus, Settings } from "lucide-react";
-import { SettingsModal } from "./Settings/Settings.tsx";
-import { ToTpCreate } from "./ToTp/ToTpCreate.tsx";
-import { ToTpAccount } from "../types/totp.ts";
+import { SettingsModal } from "../Settings/Settings.tsx";
+import { ToTpCreate } from "../ToTp/ToTpCreate.tsx";
+import { ToTpAccount } from "../../types/totp.ts";
 
 export function Footer({
-  accountSecret,
+  loginCode,
   handleRefresh,
 }: {
-  accountSecret: string;
+  loginCode: string;
   handleRefresh: (accounts: ToTpAccount[]) => void;
 }) {
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
@@ -25,7 +25,7 @@ export function Footer({
           <Settings />
         </button>
         <SettingsModal
-          accountSecret={accountSecret}
+          loginCode={loginCode}
           isOpen={settingsOpen}
           onClose={() => setSettingsOpen(false)}
         />
@@ -38,7 +38,7 @@ export function Footer({
           <Plus />
         </button>
         <ToTpCreate
-          accountSecret={accountSecret}
+          accountSecret={loginCode}
           handleRefresh={(a) => handleRefresh(a)}
           onClose={() => setOpenCreateToTpModal(false)}
           isOpen={openCreateToTpModal}

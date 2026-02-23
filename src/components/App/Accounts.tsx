@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import { Copy, Plus, Search, Settings, SkipForward } from "lucide-react";
 import { stringToIcon } from "@iconify/utils";
 import { motion } from "framer-motion";
-import { ToTpAccount } from "../types/totp";
-import { Loading } from "./Loading";
-import { generateToTp, getAccounts } from "../lib/totp";
+import { ToTpAccount } from "../../types/totp.ts";
+import { Loading } from "../Loading.tsx";
+import { generateToTp, getAccounts } from "../../lib/totp.ts";
 import { toast } from "react-toastify";
-import { ToTpModal } from "./ToTp/ToTpModal";
+import { ToTpModal } from "../ToTp/ToTpModal.tsx";
 
 export function Accounts({
   loginCode,

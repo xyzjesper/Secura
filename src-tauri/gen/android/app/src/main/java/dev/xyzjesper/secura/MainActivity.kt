@@ -1,4 +1,4 @@
-package dev.xyzjesper.fa_app
+package dev.xyzjesper.secura
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
