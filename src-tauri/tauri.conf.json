@@ -32,7 +32,7 @@
     "active": true,
     "targets": "all",
     "android": {
-      "versionCode": 102
+      "versionCode": 103
     },
     "icon": [
       "icons/32x32.png",
