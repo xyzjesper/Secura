@@ -5,7 +5,8 @@ import "./App.css";
 import { ToastContainer } from "react-toastify";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
+  <div onContextMenu={(e) => e.preventDefault()}>
+    <React.StrictMode>
     <ToastContainer
       stacked
       theme="dark"
@@ -17,5 +18,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       limit={1}
     ></ToastContainer>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
+  </div>,
 );

@@ -1,6 +1,6 @@
-use base64::{ engine::general_purpose, Engine as _ };
-use serde::{ Deserialize, Serialize };
-use simple_crypt::{ decrypt, encrypt };
+use base64::{engine::general_purpose, Engine as _};
+use serde::{Deserialize, Serialize};
+use simple_crypt::{decrypt, encrypt};
 use totp_rs::qrcodegen_image::image::EncodableLayout;
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -28,7 +28,9 @@ pub fn unblur_password(encrypted_data: &str, key: String) -> Result<String, bool
     let data = decrypt(decoded_bytes, key_bytes);
 
     match data {
-        Ok(is_ok) => Ok(String::from_utf8(is_ok).expect("Failed to convert string.").to_string()),
+        Ok(is_ok) => Ok(String::from_utf8(is_ok)
+            .expect("Failed to convert string.")
+            .to_string()),
         Err(_) => Err(true),
     }
 }
@@ -38,17 +40,15 @@ pub fn login_to_app(code: &str, secret_code: &str) -> Result<LoginCallback, Logi
     let secret = unblur_password(&secret_code, code.to_string());
 
     match secret {
-        Ok(s) =>
-            Ok(LoginCallback {
-                success: true,
-                message: "Logged in!".to_string(),
-                code: s,
-            }),
-        Err(_) =>
-            Err(LoginCallback {
-                success: false,
-                message: "Failed to login!".to_string(),
-                code: "Err".to_string(),
-            }),
+        Ok(s) => Ok(LoginCallback {
+            success: true,
+            message: "Logged in!".to_string(),
+            code: s,
+        }),
+        Err(_) => Err(LoginCallback {
+            success: false,
+            message: "Failed to login!".to_string(),
+            code: "Err".to_string(),
+        }),
     }
 }

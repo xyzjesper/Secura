@@ -16,13 +16,6 @@ export function AuthenticatorApp() {
       </>
     );
 
-  if (login == null)
-    return (
-      <>
-        <Login onLogin={(e) => setLogin(e)} isOpen={login == null} />
-      </>
-    );
-
   return (
     <>
       <div className="min-h-screen bg-background flex flex-col items-center py-10 text-white mb-10">

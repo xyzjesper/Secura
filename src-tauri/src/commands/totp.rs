@@ -1,5 +1,5 @@
-use serde::{ Deserialize, Serialize };
-use std::time::{ SystemTime, UNIX_EPOCH };
+use serde::{Deserialize, Serialize};
+use std::time::{SystemTime, UNIX_EPOCH};
 use totp_rs::TOTP;
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -41,7 +41,9 @@ pub fn make_totp(oauth: &str) -> Result<TokenResponse, TokenError> {
                 })
                 .unwrap();
             let start = SystemTime::now();
-            let since_the_epoch = start.duration_since(UNIX_EPOCH).expect("time should go forward");
+            let since_the_epoch = start
+                .duration_since(UNIX_EPOCH)
+                .expect("time should go forward");
             let seconds = since_the_epoch.as_secs() + 30;
 
             let next_token = otp.generate(seconds);

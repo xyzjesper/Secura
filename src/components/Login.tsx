@@ -44,16 +44,20 @@ export function Login({
       <div className="flex flex-col justify-center items-center">
         <InputOTP
           onChange={(e) => {
-            if (e.length == 6) {
-              setCode(e);
-              login();
-            }
+              setInterval(() => {
+                if (e.length >= 6) {
+                  setCode(e);
+                  login();
+                }
+              }, 100);
           }}
           onInput={(e) => {
-            if (e.currentTarget.value.length == 6) {
-              setCode(e.currentTarget.value);
-              login();
-            }
+              setInterval(() => {
+                if (e.currentTarget.value.length >= 6) {
+                  setCode(e.currentTarget.value);
+                  login();
+                }
+              }, 100);
           }}
           maxLength={6}
           pattern={REGEXP_ONLY_DIGITS}

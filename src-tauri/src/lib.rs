@@ -1,8 +1,8 @@
 pub mod commands;
 
 use commands::config::get_app_version;
-use commands::security::{ blur_password, unblur_password, login_to_app };
-use commands::totp::{ generate_totp_qr_base64, make_totp };
+use commands::security::{blur_password, login_to_app, unblur_password};
+use commands::totp::{generate_totp_qr_base64, make_totp};
 use std::string::String;
 use tauri_plugin_fs::FsExt;
 
@@ -15,24 +15,21 @@ pub fn run() {
     //    kind: MigrationKind::Up,
     // }];
 
-    tauri::Builder
-        ::default()
+    tauri::Builder::default()
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_sql::Builder::default().build())
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(
-            tauri::generate_handler![
-                make_totp,
-                generate_totp_qr_base64,
-                get_app_version,
-                blur_password,
-                unblur_password,
-                login_to_app
-            ]
-        )
-        .setup(|_app| {
+        .invoke_handler(tauri::generate_handler![
+            make_totp,
+            generate_totp_qr_base64,
+            get_app_version,
+            blur_password,
+            unblur_password,
+            login_to_app
+        ])
+        .setup(|_app: &mut tauri::App| {
             #[cfg(mobile)]
             _app.handle().plugin(tauri_plugin_barcode_scanner::init());
 
