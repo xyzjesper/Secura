@@ -1,15 +1,43 @@
 {
   "$schema": "../gen/schemas/mobile-schema.json",
   "identifier": "mobile-capability",
-  "windows": ["main"],
-  "platforms": ["iOS", "android"],
+  "windows": [
+    "main"
+  ],
+  "platforms": [
+    "iOS",
+    "android"
+  ],
   "permissions": [
-    "barcode-scanner:allow-scan",
-    "barcode-scanner:allow-cancel",
-    "barcode-scanner:default",
+    "core:default",
+    "opener:default",
     "sql:default",
-    "os:default",
     "sql:allow-execute",
-    "fs:allow-write-file"
+    "os:default",
+    "barcode-scanner:default",
+    "fs:default",
+    "fs:allow-download-read-recursive",
+    "fs:allow-download-write-recursive",
+    "fs:allow-download-read",
+    "fs:allow-download-write",
+    "fs:allow-download-meta-recursive",
+    "fs:allow-download-meta",
+    "fs:scope-download-recursive",
+    "fs:scope-download",
+    "fs:scope-download-index",
+    "fs:allow-appconfig-write",
+    "fs:allow-appconfig-read",
+    "fs:allow-appconfig-meta",
+    {
+      "identifier": "fs:scope",
+      "allow": [
+        {
+          "path": "$APPCONFIG/*"
+        },
+        {
+          "path": "$APPCONFIG/.secret"
+        }
+      ]
+    }
   ]
 }

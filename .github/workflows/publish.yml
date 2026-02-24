@@ -45,9 +45,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: v__VERSION__
+          tagName: v.__VERSION__
           releaseName: 'v.__VERSION__'
-          releaseBody: 'See the assets to download this version and install.'
+          releaseBody: 'Automated release from gh actions. Version Release: v.__VERSION__'
           releaseDraft: true
           prerelease: false
           args: ${{ matrix.args }}

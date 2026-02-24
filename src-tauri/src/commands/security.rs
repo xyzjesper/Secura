@@ -37,7 +37,6 @@ pub fn decrypt_keys(encrypted_data: &str, key: String) -> Result<String, bool> {
 #[tauri::command]
 pub fn login(code: &str, secret_code: &str) -> Result<LoginCallback, LoginCallback> {
     let secret = decrypt_keys(&secret_code, code.to_string());
-
     match secret {
         Ok(s) => Ok(LoginCallback {
             success: true,

@@ -1,6 +1,6 @@
 "use client";
 import {invoke} from "@tauri-apps/api/core";
-import {initDatabaseData, getDatabaseData} from "./database.ts";
+import {initDatabaseData, databaseQuery} from "./database.ts";
 import {
     AddAccountCallback,
     GetAccountCallback,
@@ -9,11 +9,11 @@ import {
 } from "../types/callback/accounts.ts";
 import {ToTpAccount} from "../types/totp.ts";
 
-export async function getAccounts(
+const fetchAccounts = async (
     accountSecret: string
-): Promise<GetAccountCallback> {
+): Promise<GetAccountCallback> => {
     try {
-        const data = (await getDatabaseData(
+        const data = (await databaseQuery(
             "SELECT * FROM accounts;"
         )) as ToTpAccount[];
 
@@ -54,10 +54,10 @@ export async function getAccounts(
     }
 }
 
-export async function addAccount(
+const addAccount = async (
     account: ToTpAccount,
     accountSecret: string
-): Promise<AddAccountCallback> {
+): Promise<AddAccountCallback> => {
     try {
         if (!account.OtpAuthUrl) {
             return {
@@ -105,7 +105,7 @@ export async function addAccount(
             ]
         );
 
-        const data = await getAccounts(accountSecret);
+        const data = await fetchAccounts(accountSecret);
         return {
             success: true,
             data: data.data,
@@ -124,9 +124,9 @@ export async function addAccount(
     }
 }
 
-export async function generateToTp(
+const generateToTp = async (
     toTpUrl: string
-): Promise<ToTpCreationCallback> {
+): Promise<ToTpCreationCallback> => {
     try {
         return await invoke<ToTpCreationCallback>("generate_totp", {
             oauth: toTpUrl,
@@ -139,7 +139,7 @@ export async function generateToTp(
     }
 }
 
-export async function deleteToTp(totpAccountId: number): Promise<boolean> {
+const deleteToTp = async (totpAccountId: number): Promise<boolean> => {
     try {
         await initDatabaseData(`DELETE
                                 FROM accounts
@@ -150,11 +150,11 @@ export async function deleteToTp(totpAccountId: number): Promise<boolean> {
     }
 }
 
-export async function updateToTp(
+const updateToTp = async (
     accountId: number,
     name?: string,
     icon?: string
-): Promise<UpdateAccountCallback> {
+): Promise<UpdateAccountCallback> => {
     try {
         if (!name && !icon)
             return {
@@ -177,7 +177,7 @@ export async function updateToTp(
             );
         }
 
-        const account = (await getDatabaseData(
+        const account = (await databaseQuery(
             `SELECT *
              FROM accounts
              WHERE Id = ${accountId};`
@@ -194,4 +194,12 @@ export async function updateToTp(
             message: `Error updating account: ${(e as Error).message}`,
         };
     }
+}
+
+export {
+    updateToTp,
+    addAccount,
+    fetchAccounts,
+    deleteToTp,
+    generateToTp
 }

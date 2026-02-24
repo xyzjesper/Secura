@@ -58,7 +58,7 @@ export function SettingsModal({
                     <ImportModal
                         loginCode={loginCode}
                         isOpen={importOpen}
-                        onClsoe={() => setImportOpen(false)}
+                        onClose={() => setImportOpen(false)}
                     ></ImportModal>
                 </div>
                 <hr className="w-full border-zinc-700 my-1"/>

@@ -1,25 +1,28 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { AuthenticatorApp as App } from "./App";
+import {AuthenticatorApp as App} from "./App";
 import "./App.css";
-import { ToastContainer } from "react-toastify";
+import {Toaster} from "sonner";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <div
-    className={"h-screen bg-background"}
-    // onContextMenu={(e) => e.preventDefault()}
-  >
-    <ToastContainer
-      stacked
-      theme="dark"
-      hideProgressBar
-      autoClose={1000}
-      closeOnClick
-      position="top-left"
-      limit={1}
-    ></ToastContainer>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </div>,
+    <div
+        className={"h-screen bg-background"}
+        onContextMenu={(e) => e.preventDefault()}
+        onContextMenuCapture={(e) => e.preventDefault()}
+    >
+        <React.StrictMode>
+            <Toaster
+                theme={"dark"}
+                style={
+                    {
+                        "--normal-bg": "var(--popover)",
+                        "--normal-text": "var(--popover-foreground)",
+                        "--normal-border": "var(--border)",
+                        "--border-radius": "var(--radius)",
+                    } as React.CSSProperties
+                }
+            />
+            <App/>
+        </React.StrictMode>
+    </div>,
 );
