@@ -6,5 +6,6 @@ export type ErrorCodeCallback = {
 export type LoginCallback = {
   success: boolean;
   message: string;
+  onboarding: boolean;
   code?: string;
 };

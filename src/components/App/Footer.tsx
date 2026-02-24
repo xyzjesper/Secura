@@ -17,32 +17,36 @@ export function Footer({
   return (
     <>
       <div className="fixed bottom-0 bg-popover/90 w-full border-t border-zinc-700 py-4 flex justify-center gap-6 shadow-2xl">
-        {/* Settings */}
-        <button
-          onClick={() => setSettingsOpen(true)}
-          className="p-4 border-4 border-ring hover:border-ring/70 bg-popover rounded-full shadow-lg transition cursor-pointer"
-        >
-          <Settings />
-        </button>
-        <SettingsModal
-          loginCode={loginCode}
-          isOpen={settingsOpen}
-          onClose={() => setSettingsOpen(false)}
-        />
+        <div className="lg:mb-5 sm:mb-10 md:mb-10 inline-flex">
+          <div className="mr-2">
+            <button
+              onClick={() => setSettingsOpen(true)}
+              className="p-4 border-4 border-ring hover:border-ring/70 bg-popover rounded-full shadow-lg transition cursor-pointer"
+            >
+              <Settings />
+            </button>
+            <SettingsModal
+              loginCode={loginCode}
+              isOpen={settingsOpen}
+              onClose={() => setSettingsOpen(false)}
+            />
+          </div>
 
-        {/* Create */}
-        <button
-          onClick={() => setOpenCreateToTpModal(true)}
-          className="p-4 border-4 border-ring hover:border-ring/70 bg-popover rounded-full shadow-lg transition cursor-pointer"
-        >
-          <Plus />
-        </button>
-        <ToTpCreate
-          accountSecret={loginCode}
-          handleRefresh={(a) => handleRefresh(a)}
-          onClose={() => setOpenCreateToTpModal(false)}
-          isOpen={openCreateToTpModal}
-        />
+          <div className="ml-2">
+            <button
+              onClick={() => setOpenCreateToTpModal(true)}
+              className="p-4 border-4 border-ring hover:border-ring/70 bg-popover rounded-full shadow-lg transition cursor-pointer"
+            >
+              <Plus />
+            </button>
+            <ToTpCreate
+              accountSecret={loginCode}
+              handleRefresh={(a) => handleRefresh(a)}
+              onClose={() => setOpenCreateToTpModal(false)}
+              isOpen={openCreateToTpModal}
+            />
+          </div>
+        </div>
       </div>
     </>
   );

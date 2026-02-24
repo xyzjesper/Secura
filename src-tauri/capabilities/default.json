@@ -2,9 +2,7 @@
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
   "description": "Capability for the main window",
-  "windows": [
-    "main"
-  ],
+  "windows": ["main"],
   "permissions": [
     "core:default",
     "opener:default",
@@ -16,6 +14,9 @@
     "fs:allow-appconfig-write",
     "fs:allow-appconfig-read",
     "fs:allow-appconfig-meta",
+    "fs:allow-download-write",
+    "fs:allow-download-read",
+    "fs:allow-download-meta",
     {
       "identifier": "fs:scope",
       "allow": [
