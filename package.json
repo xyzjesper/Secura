@@ -10,8 +10,8 @@
     "tauri": "tauri",
     "run:android": "export JAVA_HOME=/opt/android-studio/jbr && export ANDROID_HOME=\"$HOME/Android/Sdk\" && export NDK_HOME=\"$ANDROID_HOME/ndk/$(ls -1 $ANDROID_HOME/ndk)\" && bun tauri android dev --open --host",
     "run:desktop": "export RUST_BACKTRACE=full && export WEBKIT_DISABLE_DMABUF_RENDERER=1 && bun tauri dev",
-    "build:androidAPK": "export JAVA_HOME=/home/xyzjesper/.jdks/ms-21.0.8 && export ANDROID_HOME=\"$HOME/Android/Sdk\" && export NDK_HOME=\"$ANDROID_HOME/ndk/$(ls -1 $ANDROID_HOME/ndk)\" && bun tauri android build --apk true",
-    "build:androidAAB": "export JAVA_HOME=/home/xyzjesper/.jdks/ms-21.0.8 && export ANDROID_HOME=\"$HOME/Android/Sdk\" && export NDK_HOME=\"$ANDROID_HOME/ndk/$(ls -1 $ANDROID_HOME/ndk)\" && bun tauri android build --aab true"
+    "build:androidAPK": "export JAVA_HOME=/home/xyzjesper/.jdks/ms-21.0.8 && export ANDROID_HOME=\"$HOME/Android/Sdk\" && export NDK_HOME=\"$ANDROID_HOME/ndk/$(ls -1 $ANDROID_HOME/ndk)\" && bun tauri android build --apk",
+    "build:androidAAB": "export JAVA_HOME=/home/xyzjesper/.jdks/ms-21.0.8 && export ANDROID_HOME=\"$HOME/Android/Sdk\" && export NDK_HOME=\"$ANDROID_HOME/ndk/$(ls -1 $ANDROID_HOME/ndk)\" && bun tauri android build --aab"
   },
   "dependencies": {
     "@iconify/react": "^6.0.2",

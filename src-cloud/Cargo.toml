@@ -1,0 +1,9 @@
+[package]
+name = "src-cloud"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+actix-web = "4.13.0"
+dotenvy = "0.15.7"
+redis = "1.0.4"

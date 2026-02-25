@@ -28,3 +28,4 @@ dist-ssr
 /squashfs-root
 /nsis-3.08
 nsis-3.zip
+/src-cloud/target/

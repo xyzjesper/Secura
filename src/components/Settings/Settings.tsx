@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {HelpCircle, Import, RotateCcw, Upload, X} from "lucide-react";
+import {CloudIcon, HelpCircle, Import, RotateCcw, Upload, X} from "lucide-react";
 import {ExportModal} from "./Export";
 import {ResetModal} from "./Reset";
 import {ImportModal} from "./Import";
@@ -62,14 +62,26 @@ export function SettingsModal({
                     ></ImportModal>
                 </div>
                 <hr className="w-full border-zinc-700 my-1"/>
-                <div>
-                    <button
-                        onClick={() => setHelpOpen(true)}
-                        className="hover:font-bold inline-flex justify-center items-center border-2 rounded-2xl m-1 p-2 hover:cursor-pointer"
-                    >
-                        <HelpCircle className="ml-2 mr-2"></HelpCircle> Informations & Help
-                    </button>
-                    <Help isOpen={helpOpen} onClose={() => setHelpOpen(false)}></Help>
+                <div className={"flex items-center justify-center flex-col"}>
+                    <div>
+                        <button
+                            disabled={true}
+                            onClick={() => setHelpOpen(true)}
+                            className=" inline-flex justify-center items-center border-2 rounded-2xl m-1 p-2 hover:cursor-pointer bg-gray-700"
+                        >
+                            <CloudIcon className="ml-2 mr-2"></CloudIcon> Synchronisation
+                        </button>
+                        {/* COMPONENT CLOUD (hover:font-bold) */}
+                    </div>
+                    <div>
+                        <button
+                            onClick={() => setHelpOpen(true)}
+                            className="hover:font-bold inline-flex justify-center items-center border-2 rounded-2xl m-1 p-2 hover:cursor-pointer"
+                        >
+                            <HelpCircle className="ml-2 mr-2"></HelpCircle> Informations & Help
+                        </button>
+                        <Help isOpen={helpOpen} onClose={() => setHelpOpen(false)}></Help>
+                    </div>
                 </div>
                 <div>
                     <button
