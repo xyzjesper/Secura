@@ -86,7 +86,7 @@ export function Login({
             <div className="p-1 ">
                 <p className="text-center text-sm text-zinc-400 font-medium">{err}</p>
             </div>
-            <span className="text-white flex right-0 absolute top-0 p-4">
+            <span className="text-white flex right-0 absolute top-0 p-8">
         <Help
             isOpen={helpOpen}
             onClose={() => {
