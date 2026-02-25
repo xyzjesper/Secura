@@ -24,7 +24,7 @@ export function QRCodeDisplay({
             onClick={() => {
               onClose();
             }}
-            className="rounded-full transition inline-flex cursor-pointer"
+            className="rounded-full transition inline-flex cursor-pointer hover:font-bold"
           >
             Close QR Code
           </button>
