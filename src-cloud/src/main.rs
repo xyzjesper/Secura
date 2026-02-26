@@ -1,11 +1,21 @@
+mod database;
 mod routes;
+mod types;
 
-use actix_web::{App, HttpServer};
+use crate::database::redis::connect_redis;
+use crate::types::route::RouteConfig;
+use actix_web::{App, HttpServer, web};
+use std::sync::Mutex;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| {
+    let route_config = web::Data::new(RouteConfig {
+        redis_client: Mutex::new(connect_redis()),
+    });
+
+    HttpServer::new(move || {
         App::new()
+            .app_data(route_config.clone())
             .service(routes::get_data::route)
             .service(routes::post_data::route)
     })

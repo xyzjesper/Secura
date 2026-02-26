@@ -7,3 +7,4 @@ edition = "2024"
 actix-web = "4.13.0"
 dotenvy = "0.15.7"
 redis = "1.0.4"
+serde = { version = "1.0.228", features = ["derive"] }

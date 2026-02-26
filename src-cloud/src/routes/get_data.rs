@@ -1,7 +1,45 @@
-use actix_web::{Responder, post, web};
+use crate::types::route::RouteConfig;
+use actix_web::cookie::time::macros::date;
+use actix_web::{HttpResponse, Responder, get, post, web};
+use redis::TypedCommands;
+use serde::{Deserialize, Serialize};
 
-#[post("/")]
+#[derive(Serialize, Deserialize)]
+pub struct CloudGETRequest {
+    key: String,
+}
 
-async fn route(name: web::Path<String>) -> impl Responder {
-    "Hello World :D".to_string()
+#[derive(Serialize, Deserialize)]
+pub struct CloudGETResponse {
+    message: String,
+    data: String,
+    success: bool,
+}
+
+#[get("/")]
+async fn route(data: web::Json<CloudGETRequest>, config: web::Data<RouteConfig>) -> impl Responder {
+    let accounts = config.redis_client.lock().unwrap().get(data.key.clone());
+
+    match accounts {
+        Ok(exists) => {
+            if (exists.is_none()) {
+                return HttpResponse::Conflict().json(CloudGETResponse {
+                    message: "Err".to_string(),
+                    data: String::new(),
+                    success: false,
+                });
+            }
+
+            HttpResponse::Ok().json(CloudGETResponse {
+                message: "Export from the Cloud...".to_string(),
+                data: exists.unwrap(),
+                success: true,
+            })
+        }
+        Err(_) => HttpResponse::Conflict().json(CloudGETResponse {
+            message: "Err".to_string(),
+            data: String::new(),
+            success: false,
+        }),
+    }
 }
