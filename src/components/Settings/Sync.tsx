@@ -89,7 +89,8 @@ export function SyncModal({
                     </div>
                     <div className={"flex justify-center items-center flex-col"}>
                         <div className={"mb-2"}>
-                            <label className={"text-xs font-bold flex ml-1 mb-1"}>Endpoint</label>
+                            <label
+                                className={"text-xs font-bold flex ml-1 mb-1 p-1 items-center justify-center"}>Endpoint</label>
                             <input
                                 className={"border rounded-2xl p-2"}
                                 value={endpoint ?? ""}
@@ -97,26 +98,32 @@ export function SyncModal({
                                 type={"text"}
                             />
                         </div>
-                        <div>
-                            <label className={"text-xs font-bold flex ml-1 mb-1"}>Secret-Key</label>
-                            <input
-                                className={"border rounded-2xl p-2"}
-                                type={"password"}
-                                value={secret ?? ""}
-                                onChange={(e) => handleChangeValue(e.target.value, "secret")}
-                                placeholder={"Secret-Key"}
-                            />
-                            <div className={"inline-flex right-0 -ml-9 mt-2 relative cursor-pointer rounded-2xl"}>
-                                <CopyIcon
-                                    className={"inline-flex cursor-pointer rounded-2xl"}
-                                    onClick={async () => {
-                                        await navigator.clipboard.writeText(secret ?? "NO SECRET-KEY")
-                                        toast("Copied to clipboard.")
-                                    }}
-                                ></CopyIcon>
+                        <div className={"inline-flex"}>
+                            <div>
+                                <label
+                                    className={"text-xs font-bold flex ml-1 mb-1 p-1 items-center justify-center"}>Secret-Key</label>
+                                <input
+                                    className={"border rounded-2xl p-2"}
+                                    type={"password"}
+                                    value={secret ?? ""}
+                                    onChange={(e) => handleChangeValue(e.target.value, "secret")}
+                                    placeholder={"Secret-Key"}
+                                />
+                            </div>
+                            <div
+                                className={"mt-8 justify-center bg-background inline-flex -ml-10 w-8 h-8 relative cursor-pointer rounded-2xl"}>
+                                <span>
+                                    <CopyIcon
+                                        className={"cursor-pointer mt-1"}
+                                        onClick={async () => {
+                                            await navigator.clipboard.writeText(secret ?? "NO SECRET-KEY")
+                                            toast("Copied to clipboard.")
+                                        }}
+                                    ></CopyIcon>
+                                </span>
                             </div>
                         </div>
-                        <div>
+                        <div className={"p-2"}>
                             <h6 className={"text-[10px] font-extrabold"}>Share this key only with your
                                 other Devices!</h6>
                         </div>
@@ -159,7 +166,7 @@ export function SyncModal({
                                 </p>
                             </button>
                         </div>
-                        <div className={"flex items-center justify-center flex-col"}>
+                        <div className={"flex items-center justify-center flex-col p-2"}>
                             <h6 className={"text-[10px] font-extrabold"}>When you are update your settings.</h6>
                             <h6 className={"text-[10px] font-extrabold"}>Copy this key to other Devices</h6>
                         </div>
@@ -187,5 +194,6 @@ export function SyncModal({
                 </div>
             </div>
         </>
-    );
+    )
+        ;
 }
