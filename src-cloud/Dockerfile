@@ -1,7 +1,7 @@
 FROM rust:slim AS builder
 
 WORKDIR /cloud
-COPY . .
+COPY ./src-cloud .
 
 RUN cargo install --path .
 
