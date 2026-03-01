@@ -9,8 +9,10 @@ use std::sync::Mutex;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    let redis_uri = std::env::var("REDIS_URI").expect("redis_uri not set");
+
     let route_config = web::Data::new(RouteConfig {
-        redis_client: Mutex::new(connect_redis()),
+        redis_client: Mutex::new(connect_redis(redis_uri)),
     });
 
     HttpServer::new(move || {

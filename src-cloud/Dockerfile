@@ -1,13 +1,14 @@
-FROM rust:slim as builder
+FROM rust:slim AS builder
 
 WORKDIR /cloud
 COPY . .
 
-RUN cargo install --paht .
+RUN cargo install --path .
 
-FROM debian:trixie-slim as publish
+FROM debian:trixie-slim AS publish
 
-RUN apt update && apt install -y extra-runtime-dependencies && rm -rf /var/lib/apt/lists/*
-COPY --from=builder /usr/local/cargo/bin/secura /usr/local/bin/secura
+WORKDIR /cloud
 
-CMD ["secura"]
+COPY --from=builder /cloud/target/release/src-cloud /cloud/src-cloud
+
+CMD ["/cloud/src-cloud"]
