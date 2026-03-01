@@ -1180,6 +1180,7 @@ dependencies = [
  "dotenvy",
  "redis",
  "serde",
+ "serde_json",
 ]
 
 [[package]]
