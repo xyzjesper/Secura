@@ -79,7 +79,7 @@ const addAccount = async (
         try {
             await invoke("generate_totp", {
                 oauth: parsedUrl,
-            });
+            });1
         } catch (e) {
             return {
                 success: false,

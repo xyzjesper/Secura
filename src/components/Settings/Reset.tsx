@@ -3,10 +3,10 @@ import { resetApp } from "../../lib/app.ts";
 
 export function ResetModal({
   isOpen,
-  onClsoe,
+  onClose,
 }: {
   isOpen: boolean;
-  onClsoe: () => void;
+  onClose: () => void;
 }) {
   if (!isOpen) return;
 
@@ -33,7 +33,7 @@ export function ResetModal({
               className="hover:font-bold inline-flex items-center justify-center border-2 rounded-2xl p-2 cursor-pointer "
               onClick={() => {
                 handleReset();
-                onClsoe();
+                onClose();
               }}
             >
               <RotateCcw className="flex items-center justify-center ml-2 mr-2"></RotateCcw>
@@ -47,7 +47,7 @@ export function ResetModal({
           <div>
             <button
               className="inline-flex hover:font-bold cursor-pointer"
-              onClick={() => onClsoe()}
+              onClick={() => onClose()}
             >
               <X></X>
               <span>Close</span>

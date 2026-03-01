@@ -4,6 +4,7 @@ import {ExportModal} from "./Export";
 import {ResetModal} from "./Reset";
 import {ImportModal} from "./Import";
 import {Help} from "../App/Help.tsx";
+import {SyncModal} from "./Sync.tsx";
 
 export function SettingsModal({
                                   loginCode,
@@ -18,6 +19,7 @@ export function SettingsModal({
     const [exportOpen, setExportOpen] = useState<boolean>(false);
     const [resetOpen, setResetOpen] = useState<boolean>(false);
     const [importOpen, setImportOpen] = useState<boolean>(false);
+    const [syncOpen, setSyncOpen] = useState<boolean>(false);
     const [helpOpen, setHelpOpen] = useState<boolean>(false);
 
     return (
@@ -45,7 +47,7 @@ export function SettingsModal({
                         </button>
                         <ResetModal
                             isOpen={resetOpen}
-                            onClsoe={() => setResetOpen(false)}
+                            onClose={() => setResetOpen(false)}
                         />
                     </div>
                     <button
@@ -65,13 +67,12 @@ export function SettingsModal({
                 <div className={"flex items-center justify-center flex-col"}>
                     <div>
                         <button
-                            disabled={true}
-                            onClick={() => setHelpOpen(true)}
-                            className=" inline-flex justify-center items-center border-2 rounded-2xl m-1 p-2 hover:cursor-pointer bg-gray-700"
+                            onClick={() => setSyncOpen(true)}
+                            className=" inline-flex justify-center items-center border-2 rounded-2xl m-1 p-2 hover:cursor-pointer hover:font-bold"
                         >
                             <CloudIcon className="ml-2 mr-2"></CloudIcon> Synchronisation
                         </button>
-                        {/* COMPONENT CLOUD (hover:font-bold) */}
+                        <SyncModal loginCode={loginCode} isOpen={syncOpen} onClose={() => setSyncOpen(false)}/>
                     </div>
                     <div>
                         <button

@@ -45,7 +45,7 @@ pub fn login(code: &str, secret_code: &str) -> Result<LoginCallback, LoginCallba
         }),
         Err(_) => Err(LoginCallback {
             success: false,
-            message: format!("Failed to login!"),
+            message: "Failed to login!".to_string(),
             code: "Err".to_string(),
         }),
     }

@@ -2,13 +2,7 @@ import {invoke} from "@tauri-apps/api/core";
 import {AppData} from "../types/app.ts";
 import {initDatabaseData} from "./database";
 import {addAccount} from "./totp";
-import {
-    BaseDirectory,
-    create,
-    exists,
-    readTextFile,
-    writeTextFile,
-} from "@tauri-apps/plugin-fs";
+import {BaseDirectory, create, exists, readTextFile, writeTextFile,} from "@tauri-apps/plugin-fs";
 import {ErrorCodeCallback, LoginCallback} from "../types/callback/default";
 
 export const DATABASE_FILE = "secura.db";
@@ -132,11 +126,12 @@ const loginToApp = async (
     }
 }
 
+
 export {
     appVersion,
     importApp,
     resetApp,
     manageSecretKey,
     startOnboarding,
-    loginToApp
+    loginToApp,
 }

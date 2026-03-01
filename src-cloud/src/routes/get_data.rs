@@ -1,6 +1,6 @@
 use crate::types::route::RouteConfig;
 use actix_web::cookie::time::macros::date;
-use actix_web::{HttpResponse, Responder, get, post, web};
+use actix_web::{HttpRequest, HttpResponse, Responder, error, get, post, web};
 use redis::TypedCommands;
 use serde::{Deserialize, Serialize};
 
@@ -17,14 +17,17 @@ pub struct CloudGETResponse {
 }
 
 #[get("/")]
-async fn route(data: web::Json<CloudGETRequest>, config: web::Data<RouteConfig>) -> impl Responder {
+async fn route(
+    data: web::Query<CloudGETRequest>,
+    config: web::Data<RouteConfig>,
+) -> impl Responder {
     let accounts = config.redis_client.lock().unwrap().get(data.key.clone());
 
     match accounts {
         Ok(exists) => {
             if (exists.is_none()) {
                 return HttpResponse::Conflict().json(CloudGETResponse {
-                    message: "Err".to_string(),
+                    message: "No Accounts".to_string(),
                     data: String::new(),
                     success: false,
                 });
@@ -37,7 +40,7 @@ async fn route(data: web::Json<CloudGETRequest>, config: web::Data<RouteConfig>)
             })
         }
         Err(_) => HttpResponse::Conflict().json(CloudGETResponse {
-            message: "Err".to_string(),
+            message: "Error Accounts".to_string(),
             data: String::new(),
             success: false,
         }),
