@@ -1,10 +1,14 @@
-FROM rust:slim
-LABEL authors="xyzjesper"
+FROM rust:slim AS builder
 
 WORKDIR /cloud
-COPY . .
+COPY ./src-cloud .
 
-RUN cargo build
-RUN chmod +x target/release/secura
+RUN cargo install --path .
 
-ENTRYPOINT ["./target/release/secura"]
+FROM debian:trixie-slim AS publish
+
+WORKDIR /cloud
+
+COPY --from=builder /cloud/target/release/src-cloud /cloud/src-cloud
+
+CMD ["/cloud/src-cloud"]

@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - v.*
+      - master
 env:
   GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
   SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
@@ -29,9 +29,6 @@ jobs:
           path: .
       - uses: docker/setup-qemu-action@v3
 
-      - name: install libs
-        # pkg-config
-        run: sudo apt-get update -y && sudo add-apt-repository ppa:deadsnakes/ppa -y && sudo apt update && sudo apt install python3.13 -y && sudo apt install pkgconf build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev -y && python3 --version
       - uses: docker/setup-buildx-action@v3
         with:
           buildkitd-flags: --debug
