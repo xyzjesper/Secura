@@ -1,6 +1,6 @@
 [package]
 name = "secura"
-version = "0.3.1"
+version = "0.4.0"
 description = "Secura is a free open-source authenticator app for desktop and mobile devices."
 authors = ["xyzjesper"]
 edition = "2021"
