@@ -27,7 +27,7 @@ const setSyncSettings = async (loginCode: string, secret: string, endpoint?: str
     await writeTextFile(
         "sync.json",
         JSON.stringify({
-            endpoint: endpoint ?? "https://sync.secura.xyzify.ing",
+            endpoint: endpoint ?? "https://sync.secura.jespersen.zip",
             secret: secretKey
         } satisfies SyncSettings),
         {
